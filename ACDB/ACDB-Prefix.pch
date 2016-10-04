@@ -1,0 +1,30 @@
+
+#ifdef __OBJC__
+
+#import "Definitions.h"
+#import "PersistenceManager.h"
+#import "ACDBAppDelegate.h"
+
+#endif
+
+
+#define persistenceManager ([PersistenceManager sharedInstance])
+#define appDelegate (ACDBAppDelegate*)[[UIApplication sharedApplication] delegate]
+
+//#define DEBUG_MODE
+
+#ifdef DEBUG_MODE
+#define DebugLog( s, ... ) NSLog( @"<%p %@:%s(%d)> %@", self, [[NSString stringWithUTF8String:__FILE__] lastPathComponent],__FUNCTION__,__LINE__, [NSString stringWithFormat:(s), ##__VA_ARGS__] )
+
+#else
+#define DebugLog( s, ... )
+#endif
+
+#ifdef __IPHONE_6_0
+# define LINE_BREAK_WORD_WRAP NSLineBreakByWordWrapping
+#else
+# define LINE_BREAK_WORD_WRAP UILineBreakModeWordWrap
+#endif
+
+
+

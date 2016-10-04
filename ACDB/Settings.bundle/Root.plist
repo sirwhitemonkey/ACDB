@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>PreferenceSpecifiers</key>
+        <array>
+            
+            <dict>
+                <key>Type</key>
+                <string>PSTitleValueSpecifier</string>
+                <key>DefaultValue</key>
+                <string></string>
+                <key>Title</key>
+                <string>Version</string>
+                <key>Key</key>
+                <string>versionBuild</string>
+            </dict>
+            <dict>
+                <key>Type</key>
+                <string>PSGroupSpecifier</string>
+                <key>Title</key>
+                <string>Synchronisation</string>
+            </dict>
+            <dict>
+                <key>Type</key>
+                <string>PSTextFieldSpecifier</string>
+                <key>KeyboardType</key>
+                <string>NumberPad</string>
+                <key>DefaultValue</key>
+                <string>1</string>
+                <key>Title</key>
+                <string>Sync in hours</string>
+                <key>Key</key>
+                <string>syncInterval</string>
+            </dict>
+
+            
+            <dict>
+                <key>Type</key>
+                <string>PSGroupSpecifier</string>
+                <key>Title</key>
+                <string>Dropbox</string>
+            </dict>
+            <dict>
+                <key>Type</key>
+                <string>PSToggleSwitchSpecifier</string>
+                <key>Key</key>
+                <string>dropboxConnection</string>
+                <key>Title</key>
+                <string>Dropbox connection</string>
+                <key>DefaultValue</key>
+                <false/>
+                <key>FalseValue</key>
+                <false/>
+                <key>TrueValue</key>
+                <true/>
+            </dict>
+
+            <dict>
+                <key>Type</key>
+                <string>PSToggleSwitchSpecifier</string>
+                <key>Key</key>
+                <string>dropboxLogout</string>
+                <key>Title</key>
+                <string>Dropbox Logout</string>
+                <key>DefaultValue</key>
+                <false/>
+                <key>FalseValue</key>
+                <false/>
+                <key>TrueValue</key>
+                <true/>
+            </dict>
+
+
+        </array>
+        <key>StringsTable</key>
+        <string>Root</string>
+        <key>Title</key>
+        <string></string>
+    </dict>
+</plist>

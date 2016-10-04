@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10174" systemVersion="15E65" minimumToolsVersion="Xcode 4.3">
+    <entity name="Account" representedClassName="ACDBAccount" syncable="YES">
+        <attribute name="account_accountnames_data" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="account_accuserdef1_data" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="account_accuserdef2_data" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="account_accuserdef3_data" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="account_accuserdef4_data" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="account_contactmainphone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="account_employees" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="account_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="account_notes" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="account_postaladdr1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="account_postaladdr2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="account_postaladdr3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="account_postaladdr4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="account_streetaddr1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="account_streetaddr2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="account_streetaddr3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="account_streetaddr4" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="account_warning" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="account_website" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="disposal" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="sync_modifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="account_accounts" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Contact" inverseName="contact_accounts" inverseEntity="Contact" syncable="YES"/>
+        <relationship name="account_billing" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Contact" inverseName="contact_billing" inverseEntity="Contact" syncable="YES"/>
+        <relationship name="account_contacts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Contact" inverseName="contact_accountcontacts" inverseEntity="Contact" syncable="YES"/>
+        <relationship name="account_country" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Country" inverseName="account_country" inverseEntity="Country" syncable="YES"/>
+        <relationship name="account_discussions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Discussion" inverseName="discussion" inverseEntity="Discussion" syncable="YES"/>
+        <relationship name="account_postalcountry" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Country" inverseName="account_postalcountry" inverseEntity="Country" syncable="YES"/>
+        <relationship name="account_primarycontact" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Contact" inverseName="contact_primary" inverseEntity="Contact" syncable="YES"/>
+        <relationship name="account_relationship" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Relationship" inverseName="relationship" inverseEntity="Relationship" syncable="YES"/>
+        <relationship name="account_secondarycontact" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Contact" inverseName="contact_secondary" inverseEntity="Contact" syncable="YES"/>
+        <relationship name="account_stdinclass" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StdInClass" inverseName="stdinclass" inverseEntity="StdInClass" syncable="YES"/>
+    </entity>
+    <entity name="AccountNames" representedClassName="AccountNames" syncable="YES">
+        <attribute name="accountnames_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="disposal" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="sync_modifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="accountnames" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SoftLabels" inverseName="accountnames" inverseEntity="SoftLabels" syncable="YES"/>
+    </entity>
+    <entity name="AccUserDef1" representedClassName="AccUserDef1" syncable="YES">
+        <attribute name="accuserdef_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="disposal" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="sync_modifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="accuserdef1" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SoftLabels" inverseName="accuserdef1" inverseEntity="SoftLabels" syncable="YES"/>
+    </entity>
+    <entity name="AccUserDef2" representedClassName="AccUserDef2" syncable="YES">
+        <attribute name="accuserdef_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="disposal" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="sync_modifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="accuserdef2" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SoftLabels" inverseName="accuserdef2" inverseEntity="SoftLabels" syncable="YES"/>
+    </entity>
+    <entity name="AccUserDef3" representedClassName="AccUserDef3" syncable="YES">
+        <attribute name="accuserdef_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="disposal" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="sync_modifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="accuserdef3" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SoftLabels" inverseName="accuserdef3" inverseEntity="SoftLabels" syncable="YES"/>
+    </entity>
+    <entity name="AccUserDef4" representedClassName="AccUserDef4" syncable="YES">
+        <attribute name="accuserdef_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="disposal" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="sync_modifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="accuserdef4" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SoftLabels" inverseName="accuserdef4" inverseEntity="SoftLabels" syncable="YES"/>
+    </entity>
+    <entity name="BuyingPower" representedClassName="BuyingPower" syncable="YES">
+        <attribute name="buyingpower_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="disposal" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="priority" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="sync_modifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="buyingpower" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Contact" inverseName="contact_buyingpower" inverseEntity="Contact" syncable="YES"/>
+    </entity>
+    <entity name="Contact" representedClassName="Contact" syncable="YES">
+        <attribute name="contact_birthday" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="contact_chn_b_days" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contact_conuserdef1_data" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contact_conuserdef2_data" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contact_conuserdef3_data" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contact_conuserdef4_data" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contact_currentemployee" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="contact_email1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contact_email2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contact_firstname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contact_hobbies" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contact_homephone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contact_jobtitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contact_lastname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contact_mobilephone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contact_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contact_nickname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contact_notes" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contact_partner" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contact_salutation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contact_workphone1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contact_workphone2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contact_workphoneextension1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contact_workphoneextension2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="disposal" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="sync_modifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="contact_accountcontacts" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Account" inverseName="account_contacts" inverseEntity="Account" syncable="YES"/>
+        <relationship name="contact_accounts" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Account" inverseName="account_accounts" inverseEntity="Account" syncable="YES"/>
+        <relationship name="contact_billing" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Account" inverseName="account_billing" inverseEntity="Account" syncable="YES"/>
+        <relationship name="contact_buyingpower" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BuyingPower" inverseName="buyingpower" inverseEntity="BuyingPower" syncable="YES"/>
+        <relationship name="contact_discussioncontactperson" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Discussion" inverseName="discussion_contactperson" inverseEntity="Discussion" syncable="YES"/>
+        <relationship name="contact_primary" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Account" inverseName="account_primarycontact" inverseEntity="Account" syncable="YES"/>
+        <relationship name="contact_secondary" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Account" inverseName="account_secondarycontact" inverseEntity="Account" syncable="YES"/>
+        <relationship name="contact_supportlevel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SupportLevel" inverseName="relationship" inverseEntity="SupportLevel" syncable="YES"/>
+    </entity>
+    <entity name="ContactType" representedClassName="ContactType" syncable="YES">
+        <attribute name="contacttype_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="disposal" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="sync_modifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="contacttype" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Discussion" inverseName="discussion_contacttype" inverseEntity="Discussion" syncable="YES"/>
+    </entity>
+    <entity name="ConUserDef1" representedClassName="ConUserDef1" syncable="YES">
+        <attribute name="conuserdef_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="disposal" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="sync_modifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="conuserdef1" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SoftLabels" inverseName="conuserdef1" inverseEntity="SoftLabels" syncable="YES"/>
+    </entity>
+    <entity name="ConUserDef2" representedClassName="ConUserDef2" syncable="YES">
+        <attribute name="conuserdef_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="disposal" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="sync_modifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="conuserdef2" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SoftLabels" inverseName="conuserdef2" inverseEntity="SoftLabels" syncable="YES"/>
+    </entity>
+    <entity name="ConUserDef3" representedClassName="ConUserDef3" syncable="YES">
+        <attribute name="conuserdef_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="disposal" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="sync_modifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="conuserdef3" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SoftLabels" inverseName="conuserdef3" inverseEntity="SoftLabels" syncable="YES"/>
+    </entity>
+    <entity name="ConUserDef4" representedClassName="ConUserDef4" syncable="YES">
+        <attribute name="conuserdef_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="disposal" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="sync_modifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="conuserdef4" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SoftLabels" inverseName="conuserdef4" inverseEntity="SoftLabels" syncable="YES"/>
+    </entity>
+    <entity name="Country" representedClassName="Country" syncable="YES">
+        <attribute name="country_mailingpostal1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="country_mailingpostal2" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="country_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="disposal" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="sync_modifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="account_country" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Account" inverseName="account_country" inverseEntity="Account" syncable="YES"/>
+        <relationship name="account_postalcountry" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Account" inverseName="account_postalcountry" inverseEntity="Account" syncable="YES"/>
+    </entity>
+    <entity name="Discussion" representedClassName="Discussion" syncable="YES">
+        <attribute name="discussion_bringupdate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="discussion_contactdate" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="discussion_contactheader" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="discussion_notes" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="discussion_status" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="disposal" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="sync_modifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="discussion" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Account" inverseName="account_discussions" inverseEntity="Account" syncable="YES"/>
+        <relationship name="discussion_contactperson" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Contact" inverseName="contact_discussioncontactperson" inverseEntity="Contact" syncable="YES"/>
+        <relationship name="discussion_contacttype" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ContactType" inverseName="contacttype" inverseEntity="ContactType" syncable="YES"/>
+    </entity>
+    <entity name="MetaFile" representedClassName="MetaFile" syncable="YES">
+        <attribute name="disposal" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="rev" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sync_modifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Relationship" representedClassName="Relationship" syncable="YES">
+        <attribute name="disposal" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="priority" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="relationship_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sync_modifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="relationship" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Account" inverseName="account_relationship" inverseEntity="Account" syncable="YES"/>
+    </entity>
+    <entity name="SoftLabels" representedClassName="SoftLabels" syncable="YES">
+        <attribute name="disposal" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="sync_modifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="accountnames" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AccountNames" inverseName="accountnames" inverseEntity="AccountNames" syncable="YES"/>
+        <relationship name="accuserdef1" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AccUserDef1" inverseName="accuserdef1" inverseEntity="AccUserDef1" syncable="YES"/>
+        <relationship name="accuserdef2" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AccUserDef2" inverseName="accuserdef2" inverseEntity="AccUserDef2" syncable="YES"/>
+        <relationship name="accuserdef3" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AccUserDef3" inverseName="accuserdef3" inverseEntity="AccUserDef3" syncable="YES"/>
+        <relationship name="accuserdef4" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AccUserDef4" inverseName="accuserdef4" inverseEntity="AccUserDef4" syncable="YES"/>
+        <relationship name="conuserdef1" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ConUserDef1" inverseName="conuserdef1" inverseEntity="ConUserDef1" syncable="YES"/>
+        <relationship name="conuserdef2" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ConUserDef2" inverseName="conuserdef2" inverseEntity="ConUserDef2" syncable="YES"/>
+        <relationship name="conuserdef3" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ConUserDef3" inverseName="conuserdef3" inverseEntity="ConUserDef3" syncable="YES"/>
+        <relationship name="conuserdef4" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ConUserDef4" inverseName="conuserdef4" inverseEntity="ConUserDef4" syncable="YES"/>
+    </entity>
+    <entity name="StdInClass" representedClassName="StdInClass" syncable="YES">
+        <attribute name="disposal" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="stdinclass_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sync_modifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="stdinclass" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Account" inverseName="account_stdinclass" inverseEntity="Account" syncable="YES"/>
+    </entity>
+    <entity name="SupportLevel" representedClassName="SupportLevel" syncable="YES">
+        <attribute name="disposal" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="priority" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="supportlevel_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sync_modifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="relationship" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Contact" inverseName="contact_supportlevel" inverseEntity="Contact" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Account" positionX="0" positionY="0" width="128" height="523"/>
+        <element name="AccountNames" positionX="0" positionY="0" width="128" height="120"/>
+        <element name="AccUserDef1" positionX="0" positionY="0" width="128" height="118"/>
+        <element name="AccUserDef2" positionX="0" positionY="0" width="128" height="118"/>
+        <element name="AccUserDef3" positionX="0" positionY="0" width="128" height="118"/>
+        <element name="AccUserDef4" positionX="0" positionY="0" width="128" height="118"/>
+        <element name="BuyingPower" positionX="0" positionY="0" width="128" height="133"/>
+        <element name="Contact" positionX="0" positionY="0" width="128" height="568"/>
+        <element name="ContactType" positionX="0" positionY="0" width="128" height="118"/>
+        <element name="ConUserDef1" positionX="0" positionY="0" width="128" height="118"/>
+        <element name="ConUserDef2" positionX="0" positionY="0" width="128" height="118"/>
+        <element name="ConUserDef3" positionX="0" positionY="0" width="128" height="118"/>
+        <element name="ConUserDef4" positionX="0" positionY="0" width="128" height="118"/>
+        <element name="Country" positionX="0" positionY="0" width="128" height="163"/>
+        <element name="Discussion" positionX="0" positionY="0" width="128" height="208"/>
+        <element name="MetaFile" positionX="-207" positionY="144" width="128" height="103"/>
+        <element name="Relationship" positionX="0" positionY="0" width="128" height="133"/>
+        <element name="SoftLabels" positionX="-405" positionY="18" width="128" height="223"/>
+        <element name="StdInClass" positionX="0" positionY="0" width="128" height="118"/>
+        <element name="SupportLevel" positionX="0" positionY="0" width="128" height="133"/>
+    </elements>
+</model>
