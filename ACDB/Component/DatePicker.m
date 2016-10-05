@@ -276,8 +276,10 @@
 - (NSString *) getDateFormat
 {
     NSString *format;
-    if ([_field isEqualToString:@"discussion_bringupdate"]) {
-        format = @"EEE MMM dd yyyy";
+    if ([_field isEqualToString:@"discussion_bringupdate"] ||
+        [_field isEqualToString:@"discussion_contactdate"]) {
+        format = @"EEE dd MMM yyyy";
+        
     } else {
         format = @"dd/MM/yyyy";
     }

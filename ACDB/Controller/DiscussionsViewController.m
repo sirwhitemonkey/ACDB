@@ -16,6 +16,7 @@
 @property(nonatomic,strong)Discussion *discussion;
 @property(nonatomic,strong)UIBarButtonItem *infoBtn;
 @property(nonatomic,strong)UIBarButtonItem *doneBtn;
+@property(nonatomic,strong) NSDateFormatter *dateFormat;
 @end
 
 @implementation DiscussionsViewController
@@ -58,16 +59,16 @@
     
     _pageRequest=[appDelegate pageRequest];
     
+    _dateFormat =[[NSDateFormatter alloc]init];
+    [_dateFormat setDateFormat:@"EEE dd MMM yyyy"];
+    
     if (![appDelegate pageObject]) {
         _discussion = [NSEntityDescription insertNewObjectForEntityForName:ENTITY_DISCUSSION inManagedObjectContext:[persistenceManager managedObjectContext]];
         _discussion.uuid=[persistenceManager  newUUID];
         _discussion.sync_modifier = [persistenceManager newUUID];
         
-        NSDateFormatter *dateFormat=[[NSDateFormatter alloc]init];
-        [dateFormat setDateFormat:@"dd/MM/yyyy"];
-        _discussion_contactdate.text=[dateFormat stringFromDate:[NSDate date]];
-        [dateFormat setDateFormat:@"EEE MMM dd yyyy"];
-        _discussion_bringupdate.text=[dateFormat stringFromDate:[NSDate date]];
+         _discussion_contactdate.text=[_dateFormat stringFromDate:[NSDate date]];
+        _discussion_bringupdate.text=[_dateFormat stringFromDate:[NSDate date]];
         //_discussion_bringupdate.text=[dateFormat stringFromDate:[ [NSDate date] dateByAddingTimeInterval:(60*60*24*2)]];
         [_discussion setValue:[NSDate date] forKey:@"discussion_contactdate"];
         [_discussion setValue:[NSDate date] forKey:@"discussion_bringupdate"];
@@ -95,14 +96,12 @@
         }
         _discussion_contactheader.text=[appDelegate trim:_discussion.discussion_contactheader];
         
-        NSDateFormatter *dateFormat=[[NSDateFormatter alloc]init];
-        [dateFormat setDateFormat:@"dd/MM/yyyy"];
         if (_discussion.discussion_contactdate) {
-            _discussion_contactdate.text=[dateFormat stringFromDate:_discussion.discussion_contactdate];
+            _discussion_contactdate.text=[_dateFormat stringFromDate:_discussion.discussion_contactdate];
         }
         if (_discussion.discussion_bringupdate) {
-            [dateFormat setDateFormat:@"EEE MMM dd yyyy"];
-            _discussion_bringupdate.text=[dateFormat stringFromDate:_discussion.discussion_bringupdate];
+            
+            _discussion_bringupdate.text=[_dateFormat stringFromDate:_discussion.discussion_bringupdate];
         }
         _discussion_notes.text=_discussion.discussion_notes;
     }
@@ -273,29 +272,22 @@
 
 -(void)selectedDatePicker:(NSDate *)date bringups:(NSDate *)bringupsDate
 {
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc]init];
-    [dateFormat setDateFormat:@"dd/MM/yyyy"];
-    
-    self.discussion_contactdate.text = [dateFormat stringFromDate:date];
-    self.discussion_bringupdate.text = [dateFormat stringFromDate:bringupsDate];
+    self.discussion_contactdate.text = [_dateFormat stringFromDate:date];
+    self.discussion_bringupdate.text = [_dateFormat stringFromDate:bringupsDate];
     [_discussion setValue:date forKey:self.discussion_contactdate.accessibilityIdentifier];
     [_discussion setValue:bringupsDate forKey:self.discussion_bringupdate.accessibilityIdentifier];
 }
 
 -(void)selectedDatePicker:(NSDate*)date
 {
-    NSDateFormatter *dateFormat=[[NSDateFormatter alloc]init];
-    
-   
     switch((int)[appDelegate pageRequest]) {
         case PageRequest_Discussion_ContactDate:
-            [dateFormat setDateFormat:@"dd/MM/yyyy"];
-            self.discussion_contactdate.text = [dateFormat stringFromDate:date];
+            self.discussion_contactdate.text = [_dateFormat stringFromDate:date];
             [_discussion setValue:date forKey:self.discussion_contactdate.accessibilityIdentifier];
             break;
         case PageRequest_Discussion_BringupDate:
-            [dateFormat setDateFormat:@"EEE MMM dd yyyy"];
-            self.discussion_bringupdate.text = [dateFormat stringFromDate:date];
+            
+            self.discussion_bringupdate.text = [_dateFormat stringFromDate:date];
             [_discussion setValue:date forKey:self.discussion_bringupdate.accessibilityIdentifier];
             break;
     }
