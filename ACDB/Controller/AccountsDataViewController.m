@@ -39,8 +39,6 @@
     [super viewDidLoad];
     self.accessories=[[NSMutableDictionary alloc]init];
    
-   
-    
     self.tableView.tableFooterView = [[UIView alloc] init];
    
     UISearchBar *searchBar = [[UISearchBar alloc] init];
@@ -57,11 +55,8 @@
     
     self.filteredListItems=[[NSMutableArray alloc]init];
     
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Bringups"
-                                                                             style:UIBarButtonItemStyleBordered
-                                                                            target:self
-                                                                        action:@selector(bringups:)]; 
-    self.navigationItem.title=@"ACCOUNTS";
+   
+    self.navigationItem.title=@"Accounts";
     
     [self removeUnusedAccount];
     
@@ -73,7 +68,39 @@
     if (IS_IOS_7)
         self.navigationController.interactivePopGestureRecognizer.enabled=NO;
     
+    [self setupLeftMenuButton];
+
+    
 }
+
+
+-(void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[self.navigationController.navigationBar viewWithTag:HELPTEXT] removeFromSuperview];
+     [[self.navigationController.navigationBar viewWithTag:BRINGUPS] removeFromSuperview];
+
+    
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+        [appDelegate setPageController:PageAccounts];
+    }
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self
+     selector:@selector(notificationLoadedFile:)
+     name:@"notificationLoadedFile"
+     object:nil];
+  
+}
+
+- (void) viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 
 -(void) removeUnusedAccount
 {
@@ -196,10 +223,32 @@
     [info setImage:[UIImage imageNamed:@"info_24"] forState:UIControlStateNormal];
     info.tag=HELPTEXT;
     [self.navigationController.navigationBar addSubview:info];
+    
+    UIView *bringupsView = [[UIView alloc] initWithFrame:CGRectZero];
+    [bringupsView setBackgroundColor:[UIColor clearColor]];
+    UILabel *bringups = [[UILabel alloc] initWithFrame:CGRectMake(0,0, 75,24)];
+    [bringups setText:@"Bringups"];
+    [bringupsView addSubview:bringups];
+    bringupsView.tag = BRINGUPS;
+    
+    UITapGestureRecognizer *bringupsGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bringups:)];
+    [bringupsView addGestureRecognizer:bringupsGestureRecognizer];
+    
+    
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] init];
+    [attributedString appendAttributedString:[[NSAttributedString alloc] initWithString:@"Bringups"
+                                                                             attributes:@{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)}]];
+    bringups.attributedText = attributedString;
+    
+    
+    [self.navigationController.navigationBar addSubview:bringupsView];
+    
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         [info setFrame:CGRectMake(220, 10, 44, 24)];
+        [bringupsView setFrame:CGRectMake(40, 10, 75, 24)];
     } else {
         [info setFrame:CGRectMake(660, 10, 44, 24)];
+        [bringupsView setFrame:CGRectMake(50, 10, 75, 24)];
     }
     [info addTarget:self action:@selector(helpText:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationController.navigationBar.translucent=NO;
@@ -209,38 +258,18 @@
 
 
 
--(void) viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    UIButton *tempView =(UIButton *)[self.navigationController.navigationBar viewWithTag:HELPTEXT];
-    [tempView removeFromSuperview];
-    
-    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
-        [appDelegate setPageController:PageAccounts];
-    }
-}
-
-- (void) viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(notificationLoadedFile:)
-     name:@"notificationLoadedFile"
-     object:nil];
-}
-
-- (void) viewDidDisappear:(BOOL)animated {
-    [super viewDidDisappear:animated];
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
 #pragma mark - Notification
 -(void)notificationLoadedFile:(NSNotification*)notification {
     [self syncEntityObjects:YES];
 }
 
+-(void)notificationBusy:(NSNotification*)notification {
+    [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
+}
+
 -(void)accessoryView:(BOOL)hidden
 {
+    
     for(id key in self.accessories) {
         ((UISegmentedControl*)[self.accessories objectForKey:key]).tintColor = UIColorFromRGB(0xC84131);
         ((UIView*)[self.accessories objectForKey:key]).hidden=hidden;
@@ -249,12 +278,14 @@
     self.navigationItem.rightBarButtonItem=self.toggleItem;
 }
 
--(IBAction)bringups:(id)sender
+#pragma mark - IBActions
+-(IBAction)bringups:(UITapGestureRecognizer*)sender
 {
-    [appDelegate setPageController:PageBringUps];
-    [appDelegate setPageRequest:PageRequest_Bringups_Discussions];
-    [self performSegueWithIdentifier:@"DiscussionsDataViewSegue" sender:self];
-    
+    if ([[DBSession sharedSession] isLinked]) {
+        [appDelegate setPageController:PageBringUps];
+        [appDelegate setPageRequest:PageRequest_Bringups_Discussions];
+        [self performSegueWithIdentifier:@"DiscussionsDataViewSegue" sender:self];
+    }
 }
 
 -(IBAction)helpText:(id)sender
@@ -515,7 +546,7 @@
     UIButton *tempView =(UIButton *)[self.navigationController.navigationBar viewWithTag:HELPTEXT];
     [tempView removeFromSuperview];
     
-    self.navigationItem.title=@"ACCOUNTS";
+    self.navigationItem.title=@"Accounts";
     if (indexPath.section == ManagedSections_Data) {
         if (tableView == _searchDisplayController.searchResultsTableView){
             [appDelegate setPageObject:[self.filteredListItems objectAtIndex:[indexPath row]]];
@@ -622,34 +653,6 @@
     _reloadingState = NO;
     [self syncEntityObjects:YES];
     
-    
-    if ([appDelegate isSessionLinked]) {
-        
-        [appDelegate confirm:@"Sync to dropbox now ?" result:^(bool result) {
-            
-            if (result) {
-
-                NSArray *accounts = [persistenceManager entityFetchObjects:ENTITY_ACCOUNT field_name:@"uuid" ascending:NO];
-                if (accounts.count > 0) {
-                    [appDelegate syncFile:NO];
-                    
-                } else {
-                    MetaFile *metaFile = (MetaFile*)[persistenceManager entityObject:ENTITY_METAFILE];
-                    if (metaFile.rev) {
-                        [appDelegate syncFile:NO];
-                    } else {
-                        if (![appDelegate hasInternetConnection]) {
-                            [appDelegate alert:@"No internet connection and no local copy available"];
-                        }
-                    }
-                }
-
-            }
-            
-        }];
-
-        
-    }
 }
 
 
@@ -682,6 +685,14 @@
 	return [NSDate date];
 }
 
+#pragma mark - MMDrawer navigation button
+- (void)setupLeftMenuButton {
+    MMDrawerBarButtonItem * leftDrawerButton = [[MMDrawerBarButtonItem alloc] initWithTarget:self action:@selector(leftDrawerButtonPress:)];
+    [self.navigationItem setLeftBarButtonItem:leftDrawerButton];
+}
 
+- (void)leftDrawerButtonPress:(id)leftDrawerButtonPress {
+   [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
+}
 
 @end

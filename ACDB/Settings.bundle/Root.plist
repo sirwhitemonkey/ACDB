@@ -34,44 +34,6 @@
                 <string>syncInterval</string>
             </dict>
 
-            
-            <dict>
-                <key>Type</key>
-                <string>PSGroupSpecifier</string>
-                <key>Title</key>
-                <string>Dropbox</string>
-            </dict>
-            <dict>
-                <key>Type</key>
-                <string>PSToggleSwitchSpecifier</string>
-                <key>Key</key>
-                <string>dropboxConnection</string>
-                <key>Title</key>
-                <string>Dropbox connection</string>
-                <key>DefaultValue</key>
-                <false/>
-                <key>FalseValue</key>
-                <false/>
-                <key>TrueValue</key>
-                <true/>
-            </dict>
-
-            <dict>
-                <key>Type</key>
-                <string>PSToggleSwitchSpecifier</string>
-                <key>Key</key>
-                <string>dropboxLogout</string>
-                <key>Title</key>
-                <string>Dropbox Logout</string>
-                <key>DefaultValue</key>
-                <false/>
-                <key>FalseValue</key>
-                <false/>
-                <key>TrueValue</key>
-                <true/>
-            </dict>
-
-
         </array>
         <key>StringsTable</key>
         <string>Root</string>

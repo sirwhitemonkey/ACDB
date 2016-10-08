@@ -1115,7 +1115,7 @@
                                               self.contact_hobbies.frame.size.width, rowHeight);
         
     }else  if (indexPath.section == 1 && indexPath.row == 5) {
-         rowHeight = 300;
+         rowHeight = 200;
         if (![appDelegate isEmptyString:self.contact_notes.text]) {
             
             if ([self numberOfLinesForTextView:self.contact_notes containingString:_contact.contact_notes] > 1) {

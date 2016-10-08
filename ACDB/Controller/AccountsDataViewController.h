@@ -15,6 +15,8 @@
 #import "SegmentedControl.h"
 #import "PagingView.h"
 #import "DiscussionsDataViewController.h"
+#import "MMDrawerBarButtonItem.h"
+#import "UIViewController+MMDrawerController.h"
 
 
 @interface AccountsDataViewController : UITableViewController

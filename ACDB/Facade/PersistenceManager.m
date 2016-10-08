@@ -781,7 +781,7 @@
         if (error) {
             DebugLog(@"Error:%@",error);
         }
-        [appDelegate syncFile:NO];
+        [appDelegate syncFile:NO runBackup:NO];
         [_dictManagedObjectContext removeAllObjects];
     }
     
