@@ -15,6 +15,7 @@
 @property (nonatomic,assign) ManagedContextFile managedContextFile;
 @property (nonatomic,strong) ProcessingViewController *processingViewController;
 @property (nonatomic,strong) NSNumber *hoursSsyncInterval;
+@property BOOL isRequiredBackup;
 @end
 
 @implementation ACDBAppDelegate
@@ -299,10 +300,6 @@
     }
 }
 
-- (void) runBackup
-{
-   }
-
 #pragma mark - DBRestclient (Delegate)
 
 - (void) downloadFile {
@@ -324,7 +321,7 @@
     
 }
 
-- (void) syncFile:(BOOL)forceLoadFile runBackup:(BOOL) runBackup
+- (void) syncFile:(BOOL)forceLoadFile runBackup:(BOOL)runBackup
 {
     
     if (![[DBSession sharedSession] isLinked]) {
@@ -337,6 +334,8 @@
         return;
     }
     
+    _isRequiredBackup = runBackup;
+    
     [self showProcessingView:@"Dropbox synchronisation ..."];
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
@@ -348,16 +347,7 @@
          [_restClient uploadFile:ACDB_DB toPath:@"/" withParentRev:nil fromPath:persistenceManager.localPath];
     }
     
-    if (runBackup) {
-        //back up the file
-        [self delay:15 callbackBlock:^{
-            _managedContextFile = ManagedContextFile_Backup;
-            NSString *backupCopy = [NSString stringWithFormat:@"backup%@",ACDB_DB];
-            [_restClient loadMetadata:[NSString stringWithFormat:@"/%@", backupCopy]];
-        }];
-        [persistenceManager setKeyChain:@"LastDateSync" value:[self getSyncDate]];
-    }
- }
+}
 
 
 - (void)restClient:(DBRestClient *)client uploadedFile:(NSString *)destPath
@@ -374,11 +364,21 @@
         
     } else {
         
-        [self delay:3.0 callbackBlock:^{
-            [self stopProcessingView];
-            [self alert:@"Dropbox synchronisation completed"];
-            
-        }];
+        if (_isRequiredBackup) {
+            //back up the file
+            _managedContextFile = ManagedContextFile_Backup;
+            NSString *backupCopy = [NSString stringWithFormat:@"backup%@",ACDB_DB];
+            [_restClient loadMetadata:[NSString stringWithFormat:@"/%@", backupCopy]];
+            [persistenceManager setKeyChain:@"LastDateSync" value:[self getSyncDate]];
+            _isRequiredBackup = NO;
+        
+        } else {
+            [self delay:3.0 callbackBlock:^{
+                [self stopProcessingView];
+                [self alert:@"Dropbox synchronisation completed"];
+                
+            }];
+        }
         
     }
 }
@@ -401,12 +401,6 @@
         [_restClient uploadFile:ACDB_DB toPath:@"/" withParentRev:metadata.rev fromPath:persistenceManager.localPath];
         
     } else if (_managedContextFile == ManagedContextFile_Backup) {
-        UIViewController *viewController = [[ self controller] presentedViewController];
-        if ([viewController isKindOfClass:[UIAlertController class]]) {
-            [[self controller] dismissViewControllerAnimated:YES completion:nil];
-        }
-        
-        [self showProcessingView:@"Creating backup copy in dropbox.."];
         NSString *backupCopy = [NSString stringWithFormat:@"backup%@",ACDB_DB];
         [_restClient uploadFile:backupCopy toPath:@"/" withParentRev:metadata.rev fromPath:persistenceManager.localPath];
     }
@@ -439,20 +433,11 @@
     DebugLog(@"Error loading metadata: %@", error);
     [self stopProcessingView];
     
-    if (_managedContextFile == ManagedContextFile_Backup) {
-        
-        [self showProcessingView:@"Creating backup copy in dropbox.."];
-        NSString *backupCopy = [NSString stringWithFormat:@"backup%@",ACDB_DB];
-        [_restClient uploadFile:backupCopy toPath:@"/" withParentRev:nil fromPath:persistenceManager.localPath];
-
-        
-    } else {
-     
-        [persistenceManager resetCache];
-        [persistenceManager destroyCache];
-        [persistenceManager  createSampleData];
-        [self syncFile:YES runBackup:NO];
-    }
+    
+    [persistenceManager resetCache];
+    [persistenceManager destroyCache];
+    [persistenceManager  createSampleData];
+    [self syncFile:YES runBackup:NO];
 }
 
 #pragma mark - Methods

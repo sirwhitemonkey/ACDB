@@ -228,18 +228,19 @@
     [bringupsView setBackgroundColor:[UIColor clearColor]];
     UILabel *bringups = [[UILabel alloc] initWithFrame:CGRectMake(0,0, 75,24)];
     [bringups setText:@"Bringups"];
+    bringups.textColor = self.view.tintColor;
     [bringupsView addSubview:bringups];
     bringupsView.tag = BRINGUPS;
     
     UITapGestureRecognizer *bringupsGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(bringups:)];
     [bringupsView addGestureRecognizer:bringupsGestureRecognizer];
     
-    
+    /*
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] init];
     [attributedString appendAttributedString:[[NSAttributedString alloc] initWithString:@"Bringups"
                                                                              attributes:@{NSUnderlineStyleAttributeName: @(NSUnderlineStyleSingle)}]];
     bringups.attributedText = attributedString;
-    
+    */
     
     [self.navigationController.navigationBar addSubview:bringupsView];
     
@@ -542,20 +543,23 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [appDelegate setPageObject:nil];
-    UIButton *tempView =(UIButton *)[self.navigationController.navigationBar viewWithTag:HELPTEXT];
-    [tempView removeFromSuperview];
+     if ([[DBSession sharedSession] isLinked]) {
+         [appDelegate setPageObject:nil];
+         UIButton *tempView =(UIButton *)[self.navigationController.navigationBar viewWithTag:HELPTEXT];
+         [tempView removeFromSuperview];
+         
+         self.navigationItem.title=@"Accounts";
+         if (indexPath.section == ManagedSections_Data) {
+             if (tableView == _searchDisplayController.searchResultsTableView){
+                 [appDelegate setPageObject:[self.filteredListItems objectAtIndex:[indexPath row]]];
+             } else {
+                 [appDelegate setPageObject:[self.entityObjects objectAtIndex:[indexPath row]]];
+             }
+         }
+         [self performSegueWithIdentifier:@"AccountsViewSegue" sender:self];
+         [self edit];
+     }
     
-    self.navigationItem.title=@"Accounts";
-    if (indexPath.section == ManagedSections_Data) {
-        if (tableView == _searchDisplayController.searchResultsTableView){
-            [appDelegate setPageObject:[self.filteredListItems objectAtIndex:[indexPath row]]];
-        } else {
-            [appDelegate setPageObject:[self.entityObjects objectAtIndex:[indexPath row]]];
-        }
-    }
-    [self performSegueWithIdentifier:@"AccountsViewSegue" sender:self];
-    [self edit];
 }
 
 - (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView
